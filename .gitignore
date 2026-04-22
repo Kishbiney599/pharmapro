@@ -1,0 +1,25 @@
+# Dependencies
+node_modules/
+
+# Environment files (keep secrets out of git)
+.env
+.env.local
+.env.production
+
+# Build output
+build/
+dist/
+
+# Logs
+*.log
+npm-debug.log*
+
+# OS files
+.DS_Store
+Thumbs.db
+
+# Electron build output
+out/
+
+# Misc
+{const

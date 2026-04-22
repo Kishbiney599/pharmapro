@@ -1,0 +1,90 @@
+{
+  "name": "pharmapro-desktop",
+  "version": "2.0.0",
+  "description": "PharmaPro Enterprise - Pharmacy Management System",
+  "main": "electron.js",
+  "homepage": "./",
+  "author": "Stiles_Tech",
+  "scripts": {
+    "start": "react-scripts start",
+    "build": "react-scripts build",
+    "electron": "electron .",
+    "electron-dev": "concurrently \"npm start\" \"wait-on http://localhost:3000 && electron .\"",
+    "dist": "npm run build && electron-builder --win --dir",
+    "dist:installer": "npm run build && electron-builder --win nsis"
+  },
+  "build": {
+    "appId": "com.pharmapro.enterprise",
+    "productName": "PharmaPro Enterprise",
+    "copyright": "Stiles_Tech",
+    "compression": "store",
+    "directories": {
+      "output": "dist",
+      "buildResources": "public"
+    },
+    "files": [
+      "build/**/*",
+      "electron.js",
+      "preload.js",
+      "package.json"
+    ],
+    "extraMetadata": {
+      "main": "electron.js"
+    },
+    "extraResources": [
+      {
+        "from": "../pharmapro-backend",
+        "to": "backend",
+        "filter": [
+          "**/*",
+          "!node_modules/.bin/**",
+          "!*.log",
+          "!dist/**",
+          "!.git/**",
+          "!test*"
+        ]
+      }
+    ],
+    "asar": true,
+    "win": {
+      "target": [
+        {
+          "target": "nsis",
+          "arch": [
+            "x64"
+          ]
+        }
+      ],
+      "icon": "public/favicon.ico"
+    },
+    "nsis": {
+      "oneClick": true,
+      "perMachine": false,
+      "createDesktopShortcut": true,
+      "createStartMenuShortcut": true,
+      "shortcutName": "PharmaPro Enterprise",
+      "runAfterFinish": true
+    }
+  },
+  "dependencies": {
+    "react": "^18.2.0",
+    "react-dom": "^18.2.0",
+    "react-scripts": "5.0.1"
+  },
+  "devDependencies": {
+    "concurrently": "^8.2.0",
+    "wait-on": "^7.2.0"
+  },
+  "browserslist": {
+    "production": [
+      ">0.2%",
+      "not dead",
+      "not op_mini all"
+    ],
+    "development": [
+      "last 1 chrome version",
+      "last 1 firefox version",
+      "last 1 safari version"
+    ]
+  }
+}
